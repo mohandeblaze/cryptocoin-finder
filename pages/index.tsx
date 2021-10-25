@@ -1,17 +1,25 @@
-import { Box, Button, FormControl, FormLabel, IconButton, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, useDisclosure } from "@chakra-ui/react";
-import Head from "next/head";
-import React, { useState } from "react";
-import { fetchItems, coins } from "../fetcher";
+import { SettingsIcon } from "@chakra-ui/icons";
 import {
+    Box,
+    Button,
+    FormControl,
+    FormLabel,
+    IconButton,
     Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
-} from "@chakra-ui/react"
-import { SettingsIcon } from "@chakra-ui/icons";
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    NumberInput,
+    NumberInputField,
+    Select,
+    useDisclosure,
+} from "@chakra-ui/react";
+import Head from "next/head";
+import React, { useState } from "react";
+import { coins, fetchItems } from "../fetcher";
 
 const SI_SYMBOL = ["", "k", "M", "G", "T", "P", "E"];
 
@@ -34,8 +42,14 @@ setInterval(fetchItems, 1000 * 60 * 30);
 
 export default function Home(props) {
     return (
-        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minH="100vh" py="2">
-
+        <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            minH="100vh"
+            py="2"
+        >
             <Head>
                 <title>Cryptocoin finder</title>
                 <link rel="icon" href="/favicon.ico" />
@@ -43,16 +57,33 @@ export default function Home(props) {
 
             <SettingsModal />
 
-
-
-
-            <Box as="main" display="flex" flexDirection="column" w="full" flex="1" px="20" textAlign="center">
+            <Box
+                as="main"
+                display="flex"
+                flexDirection="column"
+                w="full"
+                flex="1"
+                px="20"
+                textAlign="center"
+            >
                 <Main coins={props.coins} />
             </Box>
 
-            <Box as="footer" display="flex" alignItems="center" justifyContent="center" w="full" h="12" borderTop="1px solid grey" mt="8">
-                <Box as="a"
-                    display="flex" alignItems="center" justifyContent="center"
+            <Box
+                as="footer"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                w="full"
+                h="12"
+                borderTop="1px solid grey"
+                mt="8"
+            >
+                <Box
+                    as="a"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
                     href="https://www.coingecko.com/en"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -66,7 +97,7 @@ export default function Home(props) {
 }
 
 function SettingsModal() {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <>
             <Box position="fixed" bottom="20px" right="20px">
@@ -80,7 +111,12 @@ function SettingsModal() {
                 />
             </Box>
 
-            <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount={false} closeOnOverlayClick={false}>
+            <Modal
+                isOpen={isOpen}
+                onClose={onClose}
+                blockScrollOnMount={false}
+                closeOnOverlayClick={false}
+            >
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Filter settings</ModalHeader>
@@ -88,7 +124,10 @@ function SettingsModal() {
                     <ModalBody>
                         <FormControl id="filter-coins">
                             <FormLabel>MarketCap rank:</FormLabel>
-                            <Select onChange={(e) => console.log(e.target.value)} placeholder="Select option">
+                            <Select
+                                onChange={(e) => console.log(e.target.value)}
+                                placeholder="Select option"
+                            >
                                 <option value="top50">Top 50</option>
                                 <option value="top100">Top 100</option>
                                 <option value="top250">Top 250</option>
@@ -112,7 +151,7 @@ function SettingsModal() {
                 </ModalContent>
             </Modal>
         </>
-    )
+    );
 }
 
 function Main(props) {

@@ -6,10 +6,6 @@ const CoinGeckoClient = new CoinGecko();
 export let coins = [];
 
 export async function fetchItems() {
-    coins = tokenJson;
-
-    return tokenJson;
-
     let tokens = [];
     let page = 1;
 

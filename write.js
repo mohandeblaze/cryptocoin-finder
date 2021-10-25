@@ -1,5 +1,5 @@
-const fs = require('fs');
-const CoinGecko = require('coingecko-api');
+const fs = require("fs");
+const CoinGecko = require("coingecko-api");
 
 const CoinGeckoClient = new CoinGecko();
 
@@ -10,9 +10,9 @@ async function fetchItems() {
     let page = 1;
 
     while (tokens.length < 600) {
-        console.log(`Fetching coins page: ${page}`)
+        console.log(`Fetching coins page: ${page}`);
         let items = await CoinGeckoClient.coins.markets({
-            vs_currency: 'usd',
+            vs_currency: "usd",
             per_page: 1000,
             page: page,
             ids: [],
@@ -20,7 +20,7 @@ async function fetchItems() {
             sparkline: false,
         });
 
-        var data = items.data.map(x => ({
+        var data = items.data.map((x) => ({
             id: x.id,
             name: x.name,
             ticker: x.symbol,
@@ -46,7 +46,7 @@ async function fetchItems() {
 
 async function main() {
     let coins = await fetchItems();
-    fs.writeFileSync('./public/token.json', JSON.stringify(coins, null, 4), { encoding: 'utf-8' });
+    fs.writeFileSync("./public/token.json", JSON.stringify(coins, null, 4), { encoding: "utf-8" });
 }
 
 main();
